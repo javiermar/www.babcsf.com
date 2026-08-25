@@ -9,6 +9,7 @@ type MotionRevealProps = {
   delay?: number;
   direction?: "up" | "left" | "right";
   id?: string;
+  ariaLabel?: string;
 };
 
 const offsets = {
@@ -17,13 +18,14 @@ const offsets = {
   right: { x: 28, y: 0 },
 } as const;
 
-export function MotionReveal({ children, className = "", delay = 0, direction = "up", id }: MotionRevealProps) {
+export function MotionReveal({ children, className = "", delay = 0, direction = "up", id, ariaLabel }: MotionRevealProps) {
   const reduceMotion = useReducedMotion();
   const offset = offsets[direction];
 
   return (
     <motion.div
       id={id}
+      aria-label={ariaLabel}
       className={className}
       initial={reduceMotion ? false : { opacity: 0, ...offset }}
       whileInView={reduceMotion ? undefined : { opacity: 1, x: 0, y: 0 }}
