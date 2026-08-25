@@ -1,5 +1,6 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
+import { AnimatedHeadline } from "@/components/AnimatedHeadline";
+import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { MotionReveal } from "@/components/MotionReveal";
 
 const links = {
@@ -24,15 +25,15 @@ const board = [
   ["Nora Garcia", "Secretary", "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/nora-garcia_1.jpg"],
 ] as const;
 
+const scholarSlides = [
+  { id: "scholar-2025", eyebrow: "2025 cohort", title: "Nine scholars celebrated", body: "A growing class of young women supported by BABC scholarships, mentorship, and community.", image: images.scholars2025, alt: "BABC 2025 scholarship recipients" },
+  { id: "scholar-naomi", eyebrow: "2026 Rising Star", title: "Naomi Zamora", body: "UCLA Psychobiology graduate, former research assistant, and now a 911 dispatcher with UCLA Police.", image: images.naomi, alt: "Naomi Zamora, BABC 2026 Rising Star" },
+  { id: "scholar-2024", eyebrow: "2024 cohort", title: "Eight scholars, $16,000 invested", body: "Selected from more than 110 applicants representing 18 Southern California schools and colleges.", image: images.scholars2024, alt: "BABC 2024 scholarship recipients" },
+] as const;
+
 function Cta({ href, children, outline = false }: { href: string; children: ReactNode; outline?: boolean }) {
   return (
-    <a
-      className={`btn ${outline ? "btn-outline" : "btn-primary"}`}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-track="cta"
-    >
+    <a className={`btn ${outline ? "btn-outline" : "btn-primary"}`} href={href} target="_blank" rel="noopener noreferrer" data-track="cta">
       {children}<span aria-hidden>→</span>
     </a>
   );
@@ -43,7 +44,7 @@ export default function Home() {
     <>
       <header className="navbar shell site-nav">
         <a href="#top" className="brand" aria-label="BABC Scholarship Foundation home">
-          <span className="brand-mark">✦</span>
+          <span className="brand-mark" aria-hidden>✦</span>
           <span><strong>BABC</strong><small>Scholarship Foundation</small></span>
         </a>
         <nav aria-label="Primary navigation" className="nav-links">
@@ -54,35 +55,78 @@ export default function Home() {
 
       <main id="top">
         <section className="shell hero-grid">
-          <MotionReveal className="hero-copy">
+          <MotionReveal className="hero-copy" direction="left">
             <p className="eyebrow">Believe &amp; Achieve</p>
-            <h1>Empowering young women to <em>believe, achieve,</em> and pursue higher education.</h1>
-            <p className="lede">BABC is a nonprofit founded by professional women and community leaders. Through scholarships, mentorship, leadership development, and community support, we invest in the potential of young women and help them build brighter futures.</p>
+            <AnimatedHeadline before="Empowering young women to" accent="believe, achieve," after="and pursue higher education." />
+            <p className="lede">Scholarships open the door. Mentorship, leadership development, and a community of accomplished women help scholars keep moving forward.</p>
             <div className="actions"><Cta href={links.apply}>Apply for a Scholarship</Cta><Cta href={links.donate} outline>Donate</Cta></div>
           </MotionReveal>
-          <MotionReveal className="hero-collage" delay={0.08}>
-            <div className="hero-main"><Image src={images.scholars2025} alt="BABC scholarship recipients" fill priority sizes="(max-width: 900px) 100vw, 50vw" /></div>
-            <div className="floating-photo floating-one"><Image src={images.naomi} alt="BABC scholar Naomi Zamora" fill sizes="220px" /></div>
-            <div className="floating-photo floating-two"><Image src={images.scholars2024} alt="BABC scholars" fill sizes="220px" /></div>
+          <MotionReveal className="hero-collage" delay={0.08} direction="right">
+            <div className="hero-main"><ImageWithSkeleton src={images.scholars2025} alt="BABC scholarship recipients" fill priority sizes="(max-width: 900px) 100vw, 50vw" /></div>
+            <div className="floating-photo floating-one"><ImageWithSkeleton src={images.naomi} alt="BABC scholar Naomi Zamora" fill sizes="220px" /></div>
+            <div className="floating-photo floating-two"><ImageWithSkeleton src={images.scholars2024} alt="BABC scholars" fill sizes="220px" /></div>
           </MotionReveal>
         </section>
 
-        <section className="shell stats card">
-          <div><span className="stat-icon">🎓</span><strong>27</strong><small>Scholarships Awarded</small></div>
-          <div><span className="stat-icon">♡</span><strong>$45,500+</strong><small>Invested Since 2022</small></div>
-          <div><span className="stat-icon">◎</span><strong>110+</strong><small>Applicants in 2024</small></div>
-        </section>
+        <MotionReveal className="shell stats stats-horizontal card" aria-label="BABC impact at a glance">
+          <div className="stat"><div className="stat-figure">🎓</div><div className="stat-value">27</div><div className="stat-desc">Scholarships awarded</div></div>
+          <div className="stat"><div className="stat-figure">♡</div><div className="stat-value">$45,500+</div><div className="stat-desc">Invested since 2022</div></div>
+          <div className="stat"><div className="stat-figure">◎</div><div className="stat-value">110+</div><div className="stat-desc">Applicants in 2024</div></div>
+        </MotionReveal>
 
         <section id="mission" className="shell mission-grid section-pad">
-          <MotionReveal><p className="eyebrow">Our mission</p><h2>More than a scholarship. A lifelong commitment.</h2><p className="body-copy">Financial support is only the beginning. BABC walks alongside scholars with mentorship, resources, encouragement, and meaningful professional exposure so they can thrive in college, in their careers, and in life.</p><p className="signature">We believe in her. We invest in her future. We celebrate her success.</p></MotionReveal>
-          <MotionReveal delay={0.08} className="spotlight-wrap"><p className="eyebrow centered">Scholarship recipient spotlight</p><div className="spotlight-grid"><article className="card scholar-mini"><Image src={images.scholars2024} alt="BABC scholarship recipients" width={480} height={320}/><h3>2024 Cohort</h3><p>Eight scholars selected from more than 110 applicants.</p></article><article className="card scholar-mini featured"><span className="badge badge-primary">2026 Rising Star</span><Image src={images.naomi} alt="Naomi Zamora" width={480} height={320}/><h3>Naomi Zamora</h3><p>UCLA Psychobiology graduate and 911 dispatcher with UCLA Police.</p></article></div></MotionReveal>
+          <MotionReveal direction="left"><p className="eyebrow">Our mission</p><h2>More than a scholarship. A lifelong commitment.</h2><p className="body-copy">BABC walks alongside scholars with funding, mentorship, encouragement, and meaningful professional exposure so they can thrive in college, in their careers, and in life.</p><p className="signature">We believe in her. We invest in her future. We celebrate her success.</p></MotionReveal>
+
+          <MotionReveal delay={0.08} direction="right" className="spotlight-wrap">
+            <div className="section-row"><div><p className="eyebrow">Scholar stories</p><h3 className="compact-heading">Meet the women at the center of the mission.</h3></div><div className="carousel-controls" aria-label="Scholar carousel navigation">{scholarSlides.map((slide, index) => <a className="btn btn-circle btn-sm" key={slide.id} href={`#${slide.id}`} aria-label={`Show scholar story ${index + 1}`}>{index + 1}</a>)}</div></div>
+            <div className="carousel carousel-center scholar-carousel" aria-label="Scholar stories">
+              {scholarSlides.map((slide) => (
+                <article id={slide.id} className="carousel-item card scholar-slide" key={slide.id}>
+                  <div className="scholar-slide-image"><ImageWithSkeleton src={slide.image} alt={slide.alt} fill sizes="(max-width: 900px) 82vw, 430px" /></div>
+                  <div className="scholar-slide-copy"><span>{slide.eyebrow}</span><h3>{slide.title}</h3><p>{slide.body}</p></div>
+                </article>
+              ))}
+            </div>
+          </MotionReveal>
         </section>
 
-        <section id="scholarships" className="section-soft"><div className="shell scholarship-grid"><MotionReveal className="card cycle-card"><p className="eyebrow">2026 Scholarship Cycle</p><h2>Applications are open now.</h2><ul className="clean-list"><li><strong>August 17 – September 17, 2026</strong><span>Application window</span></li><li><strong>Southern California residents</strong><span>Current residency requirement</span></li><li><strong>High school seniors &amp; first-year college students</strong><span>Current student eligibility</span></li></ul><Cta href={links.apply}>Apply Now</Cta></MotionReveal><MotionReveal id="mentorship" delay={0.08} className="mentorship-card"><p className="eyebrow">Mentorship that makes a difference</p><h2>Our scholars are never alone on their journey.</h2><ul className="check-list"><li>Confidence-building and leadership development</li><li>Professional exposure and career exploration</li><li>Networking with accomplished women leaders</li><li>Life-skills programming for long-term success</li></ul></MotionReveal></div></section>
+        <section id="scholarships" className="section-soft">
+          <div className="shell scholarship-stack">
+            <MotionReveal className="section-intro"><p className="eyebrow">2026 Scholarship Cycle</p><h2>Applications are open now.</h2><p className="body-copy">Ten $2,000 scholarships are planned for current Southern California high school seniors and first-year college students.</p></MotionReveal>
 
-        <section id="board" className="shell section-pad"><MotionReveal><p className="eyebrow">Meet our board</p><h2>A dedicated team of professional women committed to lifting up the next generation.</h2></MotionReveal><div className="board-grid">{board.map(([name,role,image],index)=><MotionReveal key={name} delay={index*0.04}><article className="card board-card"><div className="board-photo"><Image src={image} alt={`${name}, ${role}`} fill sizes="220px" /></div><h3>{name}</h3><p>{role}</p></article></MotionReveal>)}</div></section>
+            <MotionReveal delay={0.05}>
+              <ul className="timeline scholarship-timeline" aria-label="2026 scholarship timeline">
+                <li><div className="timeline-start">Aug 17</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Applications open</div><hr /></li>
+                <li><hr /><div className="timeline-start">Sep 17</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Application deadline</div><hr /></li>
+                <li><hr /><div className="timeline-start">By Oct 5</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Recipients announced</div><hr /></li>
+                <li><hr /><div className="timeline-start">Nov 13</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Scholarship Gala</div></li>
+              </ul>
+            </MotionReveal>
 
-        <section id="gala" className="gala-section"><div className="shell gala-grid"><MotionReveal className="gala-copy"><p className="eyebrow light">Save the date</p><h2>Fifth Annual BABC Scholarship Foundation Gala</h2><p>Friday, November 13, 2026 · 6:00 PM</p><p className="body-copy light-copy">An elegant evening bringing together scholars, sponsors, volunteers, and community leaders to fund scholarships and mentorship for young women.</p><div className="actions"><Cta href={links.gala}>View Gala</Cta><Cta href={links.sponsor} outline>Become a Sponsor</Cta></div></MotionReveal><MotionReveal className="gala-image" delay={0.08}><Image src={images.gala} alt="BABC Scholarship Foundation gala" fill sizes="(max-width: 900px) 100vw, 50vw" /></MotionReveal></div></section>
+            <div className="scholarship-detail-grid">
+              <MotionReveal direction="left" className="scholarship-collapses">
+                <details className="collapse collapse-arrow bg-base-100 border border-base-300" open><summary className="collapse-title">Who can apply?</summary><div className="collapse-content"><p>Current Southern California residents who are high school seniors or first-year college students.</p></div></details>
+                <details className="collapse collapse-arrow bg-base-100 border border-base-300"><summary className="collapse-title">What does BABC consider?</summary><div className="collapse-content"><p>Educational commitment, financial need, resilience, leadership, community involvement, and a positive vision for the future.</p></div></details>
+                <details className="collapse collapse-arrow bg-base-100 border border-base-300"><summary className="collapse-title">What happens after the award?</summary><div className="collapse-content"><p>Recipients join a growing community with mentorship, networking, leadership experiences, and continued alumni connection.</p></div></details>
+              </MotionReveal>
+              <MotionReveal id="mentorship" direction="right" className="mentorship-card card"><p className="eyebrow">Mentorship that makes a difference</p><h2>Our scholars are never alone on their journey.</h2><ul className="check-list"><li>Confidence-building and leadership development</li><li>Professional exposure and career exploration</li><li>Networking with accomplished women leaders</li><li>Life-skills programming for long-term success</li></ul><Cta href={links.apply}>Apply Now</Cta></MotionReveal>
+            </div>
+          </div>
+        </section>
+
+        <section id="board" className="shell section-pad board-section">
+          <MotionReveal><div className="section-row"><div><p className="eyebrow">Meet our board</p><h2>A professional network turned into opportunity.</h2></div><p className="body-copy section-aside">Leaders from finance, real estate, banking, tax, title, and community development volunteer their time and experience to support scholars.</p></div></MotionReveal>
+          <MotionReveal delay={0.06} className="carousel carousel-center board-carousel" aria-label="BABC board members">
+            {board.map(([name, role, image]) => <article className="carousel-item card board-card" key={name}><div className="board-photo"><ImageWithSkeleton src={image} alt={`${name}, ${role}`} fill sizes="220px" /></div><h3>{name}</h3><p>{role}</p></article>)}
+          </MotionReveal>
+        </section>
+
+        <section id="gala" className="gala-section">
+          <div className="shell gala-grid">
+            <MotionReveal className="gala-copy" direction="left"><p className="eyebrow light">Save the date</p><h2>Fifth Annual BABC Scholarship Foundation Gala</h2><p className="gala-date">Friday, November 13, 2026 · 6:00 PM</p><p className="body-copy light-copy">An elegant evening uniting scholars, sponsors, volunteers, and community leaders to fund the next class of BABC scholars.</p><div className="actions"><Cta href={links.gala}>View Gala</Cta><Cta href={links.sponsor} outline>Become a Sponsor</Cta></div></MotionReveal>
+            <MotionReveal className="gala-image" delay={0.08} direction="right"><ImageWithSkeleton src={images.gala} alt="BABC Scholarship Foundation gala" fill sizes="(max-width: 900px) 100vw, 50vw" /></MotionReveal>
+          </div>
+        </section>
 
         <section className="shell final-cta section-pad"><MotionReveal><p className="eyebrow">Keep the circle growing</p><h2>Help a young woman turn possibility into a degree.</h2><div className="actions"><Cta href={links.donate}>Make a Donation</Cta><Cta href={links.apply} outline>Apply for a Scholarship</Cta></div></MotionReveal></section>
       </main>
