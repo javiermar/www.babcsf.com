@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 const links = {
@@ -12,261 +13,162 @@ const images = {
   naomi: "https://www.babcsf.com/uploads/5/0/9/3/50936111/naomi_orig.jpg",
   scholars2025: "https://www.babcsf.com/uploads/5/0/9/3/50936111/unnamed-5_orig.jpg",
   scholars2024: "https://www.babcsf.com/uploads/5/0/9/3/50936111/group_orig.jpg",
-  scholars2023: "https://www.babcsf.com/uploads/5/0/9/3/50936111/group2_orig.jpg",
 } as const;
 
 const board = [
-  {
-    name: "Jade Ramos",
-    role: "President",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/jade-ramos_1.jpg",
-    bio: "Real-estate finance leader and community advocate focused on expanding opportunity for women and the next generation.",
-  },
-  {
-    name: "Janie Rodriguez",
-    role: "Vice President",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/janie-marquez_1.png",
-    bio: "Banking leader and financial-literacy advocate with more than two decades serving Southern California communities.",
-  },
-  {
-    name: "Martha Morales",
-    role: "Treasurer",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/martha-morales_1.png",
-    bio: "Real-estate professional and educator centered on homeownership, wealth building, and community service.",
-  },
-  {
-    name: "Veronica Franco",
-    role: "Co-Treasurer",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/veronicapic_orig.jpg",
-    bio: "Title-industry leader, founding BABC member, and longtime volunteer committed to education and service.",
-  },
-  {
-    name: "Nora Garcia",
-    role: "Secretary",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/nora-garcia_1.jpg",
-    bio: "Bilingual tax professional and small-business owner who has served her community for more than two decades.",
-  },
-  {
-    name: "Rosa Alicia Centeno",
-    role: "Director",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/rosa-alicia-headshot_1.png",
-    bio: "Real-estate professional and community advocate whose work is rooted in education, generosity, and service.",
-  },
-  {
-    name: "Jennifer Zamora",
-    role: "Director",
-    image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/jen-zamora-headshot_1.jpg",
-    bio: "Banking and community-development leader advancing financial literacy and economic opportunity.",
-  },
+  ["Jade Ramos", "President", "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/jade-ramos_1.jpg"],
+  ["Janie Rodriguez", "Vice President", "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/janie-marquez_1.png"],
+  ["Martha Morales", "Treasurer", "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/martha-morales_1.png"],
+  ["Veronica Franco", "Co-Treasurer", "https://www.babcsf.com/uploads/5/0/9/3/50936111/veronicapic_orig.jpg"],
+  ["Nora Garcia", "Secretary", "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/nora-garcia_1.jpg"],
 ] as const;
 
-const impact = [
-  ["27", "scholarships awarded through 2025"],
-  ["$45,500+", "invested directly in scholarships"],
-  ["110+", "2024 applicants from 18 schools"],
-] as const;
-
-function ExternalButton({ href, children, variant = "primary" }: { href: string; children: ReactNode; variant?: "primary" | "quiet" }) {
+function LogoPlaceholder() {
   return (
-    <a
-      className={`button ${variant === "quiet" ? "button-quiet" : ""}`}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-track="cta"
-    >
-      {children}
-      <span aria-hidden>↗</span>
-    </a>
+    <div className="logo-placeholder" aria-label="BABC Scholarship Foundation logo placeholder">
+      <span className="logo-mark">LOGO</span>
+      <span className="logo-copy"><strong>BABC</strong><small>Scholarship Foundation</small></span>
+    </div>
   );
 }
 
-function SectionIntro({ eyebrow, title, body }: { eyebrow: string; title: string; body?: string }) {
+function Cta({ href, children, secondary = false }: { href: string; children: ReactNode; secondary?: boolean }) {
   return (
-    <div className="section-intro">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {body ? <p className="section-copy">{body}</p> : null}
-    </div>
+    <a className={`cta ${secondary ? "cta-secondary" : ""}`} href={href} target="_blank" rel="noopener noreferrer" data-track="cta">
+      {children}<span aria-hidden>→</span>
+    </a>
   );
 }
 
 export default function Home() {
   return (
     <>
-      <div className="announcement">
-        <span>2026 scholarship applications are open through September 17.</span>
-        <a href={links.apply} target="_blank" rel="noopener noreferrer">Apply now</a>
-      </div>
-
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="BABC Scholarship Foundation home">
-          <span className="brand-monogram">BABC</span>
-          <span className="brand-copy"><strong>Scholarship Foundation</strong><small>Believe &amp; Achieve Book Club</small></span>
-        </a>
+        <Link href="/" className="brand-link"><LogoPlaceholder /></Link>
         <nav aria-label="Primary navigation">
-          <a href="#scholars">Scholars</a>
-          <a href="#mission">Mission</a>
+          <a href="#mission">About</a>
           <a href="#scholarships">Scholarships</a>
+          <a href="#mentorship">Mentorship</a>
+          <Link href="/2026">Gala</Link>
           <a href="#board">Board</a>
+          <a href="#impact">Impact</a>
         </nav>
-        <ExternalButton href={links.donate} variant="quiet">Donate</ExternalButton>
+        <Cta href={links.donate}>Donate</Cta>
       </header>
 
-      <main id="top">
+      <main>
         <section className="hero shell">
           <div className="hero-copy">
-            <p className="eyebrow">From dreams to degrees</p>
-            <h1>Belief changes what a young woman can imagine for herself.</h1>
-            <p className="hero-lede">
-              BABC helps young women move into higher education with scholarships, mentorship, leadership experiences, and a network that keeps showing up after the award.
-            </p>
-            <div className="actions">
-              <ExternalButton href={links.apply}>Apply for a scholarship</ExternalButton>
-              <a className="text-link" href="#scholars">Meet our scholars <span aria-hidden>↓</span></a>
+            <p className="eyebrow">Believe. Achieve. Lead.</p>
+            <h1>Empowering young women to <em>believe, achieve,</em> and pursue higher education.</h1>
+            <p className="lede">BABC Scholarship Foundation is led by professional women and community leaders who invest in the potential of young women through scholarships, mentorship, leadership development, and community support.</p>
+            <div className="button-row">
+              <Cta href={links.apply}>Apply for a Scholarship</Cta>
+              <Cta href={links.donate} secondary>Donate</Cta>
             </div>
           </div>
-
-          <figure className="hero-portrait">
-            <div className="image-frame image-frame-hero">
-              <Image src={images.naomi} alt="Naomi Zamora, BABC scholarship alumna and 2026 Rising Star" fill priority sizes="(max-width: 900px) 100vw, 44vw" />
-            </div>
-            <figcaption>
-              <span>2026 Rising Star</span>
-              <strong>Naomi Zamora</strong>
-              <small>UCLA graduate · Psychobiology</small>
-            </figcaption>
-          </figure>
-        </section>
-
-        <section id="scholars" className="scholars-section">
-          <div className="shell scholars-shell">
-            <SectionIntro
-              eyebrow="The heart of the foundation"
-              title="Meet the women your support is investing in."
-              body="Every scholarship represents a student with plans, responsibilities, resilience, and a future already in motion. BABC puts their stories at the center of the work."
-            />
-
-            <div className="scholar-gallery">
-              <article className="scholar-card scholar-card-wide">
-                <div className="image-frame image-frame-group">
-                  <Image src={images.scholars2025} alt="The 2025 BABC scholarship recipients" fill sizes="(max-width: 900px) 100vw, 64vw" />
-                </div>
-                <div className="scholar-card-copy"><span>2025 cohort</span><strong>Nine scholarship recipients</strong><p>Celebrated alongside the board and community at the 2025 scholarship gala.</p></div>
-              </article>
-
-              <article className="scholar-card scholar-card-tall">
-                <div className="image-frame image-frame-portrait">
-                  <Image src={images.naomi} alt="Naomi Zamora on the UCLA campus" fill sizes="(max-width: 900px) 100vw, 30vw" />
-                </div>
-                <blockquote>
-                  “The beautiful and amazing women are who inspire me to keep going and make a change in society.”
-                  <cite>Naomi Zamora</cite>
-                </blockquote>
-              </article>
-
-              <article className="scholar-card scholar-card-wide scholar-card-secondary">
-                <div className="image-frame image-frame-group">
-                  <Image src={images.scholars2024} alt="The 2024 BABC scholarship recipients" fill sizes="(max-width: 900px) 100vw, 64vw" />
-                </div>
-                <div className="scholar-card-copy"><span>2024 cohort</span><strong>Eight scholars · $2,000 each</strong><p>Selected from more than 110 applicants across 18 Southern California schools and colleges.</p></div>
-              </article>
-            </div>
+          <div className="hero-visual" aria-label="BABC scholars">
+            <div className="hero-main-photo"><Image src={images.scholars2025} alt="BABC scholarship recipients" fill priority sizes="(max-width: 900px) 100vw, 50vw" /></div>
+            <div className="hero-polaroid hero-polaroid-top"><Image src={images.naomi} alt="Naomi Zamora, 2026 BABC Rising Star" fill sizes="220px" /></div>
+            <div className="hero-polaroid hero-polaroid-bottom"><Image src={images.scholars2024} alt="BABC scholarship recipients" fill sizes="200px" /></div>
           </div>
         </section>
 
-        <section className="impact-strip shell" aria-label="BABC impact at a glance">
-          {impact.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}
+        <section id="impact" className="impact-bar shell" aria-label="BABC impact">
+          <article><span className="impact-icon">27</span><div><strong>27</strong><small>Scholarships awarded</small></div></article>
+          <article><span className="impact-icon">$</span><div><strong>$45,500+</strong><small>Invested since 2022</small></div></article>
+          <article><span className="impact-icon">+</span><div><strong>Growing</strong><small>Community of scholars & mentors</small></div></article>
         </section>
 
-        <section id="mission" className="mission-section shell">
-          <div className="mission-statement">
+        <section id="mission" className="mission shell">
+          <div>
             <p className="eyebrow">Our mission</p>
-            <h2>Open the door. Walk with her. Help her lead.</h2>
+            <h2>More than a scholarship. A lifelong commitment.</h2>
           </div>
           <div className="mission-copy">
-            <p>
-              Believe and Achieve began as a book club created by professional women and community leaders who wanted to support one another and give back. That circle of women grew into a nonprofit scholarship foundation centered on helping young women pursue higher education.
-            </p>
-            <p>
-              Today, BABC combines financial support with mentorship, professional exposure, confidence-building experiences, financial literacy, and a community that celebrates scholars beyond graduation.
-            </p>
-            <a className="text-link" href="#scholarships">How the scholarship program works <span aria-hidden>→</span></a>
+            <p>Financial support is only the beginning. BABC walks alongside scholars with mentorship, resources, professional exposure, and encouragement to help them thrive in college, in their careers, and in life.</p>
+            <p className="mission-mantra">We believe in her. We invest in her future. We celebrate her success.</p>
           </div>
         </section>
 
-        <section className="mentorship-feature">
-          <div className="shell mentorship-grid">
-            <div className="image-frame image-frame-mentorship">
-              <Image src={images.scholars2023} alt="BABC scholars participating in an alumni experience" fill sizes="(max-width: 900px) 100vw, 52vw" />
-            </div>
-            <div className="mentorship-copy">
-              <p className="eyebrow">Beyond the award</p>
-              <h2>Success is more than tuition.</h2>
-              <p>BABC creates experiences that help scholars feel confident in rooms they may be entering for the first time, from professional dining and networking to golf, financial education, alumni connection, and career exposure.</p>
-              <p className="pull-quote">A scholarship is the beginning of the relationship, not the end.</p>
-            </div>
+        <section className="scholar-spotlight shell">
+          <div className="section-heading">
+            <p className="eyebrow">Scholarship recipient spotlight</p>
+            <h2>The women at the center of the mission.</h2>
+          </div>
+          <div className="spotlight-grid">
+            <article className="spotlight-card wide">
+              <div className="spotlight-image"><Image src={images.scholars2025} alt="2025 BABC scholarship recipients" fill sizes="(max-width: 900px) 100vw, 58vw" /></div>
+              <div><span>2025 cohort</span><h3>Nine scholarship recipients</h3><p>Celebrated together with the BABC board and community.</p></div>
+            </article>
+            <article className="spotlight-card featured">
+              <div className="spotlight-image portrait"><Image src={images.naomi} alt="Naomi Zamora" fill sizes="(max-width: 900px) 100vw, 28vw" /></div>
+              <div><span>2026 Rising Star</span><h3>Naomi Zamora</h3><p>UCLA graduate in Psychobiology who now works as a 911 dispatcher with the UCLA Police Department.</p></div>
+            </article>
           </div>
         </section>
 
-        <section id="scholarships" className="scholarship-section shell">
-          <SectionIntro
-            eyebrow="2026 scholarship program"
-            title="Ten $2,000 scholarships for Southern California students."
-            body="Applicants must be current Southern California residents and either current high school seniors or first-year college students."
-          />
-
-          <div className="scholarship-layout">
-            <div className="timeline" aria-label="2026 scholarship timeline">
-              <div><span>01</span><strong>August 17</strong><small>Applications open</small></div>
-              <div><span>02</span><strong>September 17</strong><small>Application deadline</small></div>
-              <div><span>03</span><strong>By October 5</strong><small>Recipients announced</small></div>
-              <div><span>04</span><strong>November 13</strong><small>Scholarship gala</small></div>
-            </div>
-            <aside className="criteria-card">
-              <p className="eyebrow">Selection considers</p>
-              <ul><li>Educational commitment</li><li>Financial need</li><li>Resilience and leadership</li><li>Community involvement</li><li>A positive vision for the future</li></ul>
-              <ExternalButton href={links.apply}>Start the application</ExternalButton>
-            </aside>
+        <section id="scholarships" className="program-band">
+          <div className="shell program-grid">
+            <article className="program-card scholarship-card">
+              <p className="eyebrow">2026 Scholarship Cycle</p>
+              <h2>Applications are open.</h2>
+              <ul>
+                <li><strong>August 17 – September 17, 2026</strong></li>
+                <li>Open to current Southern California residents</li>
+                <li>For current high school seniors and first-year college students</li>
+                <li>Ten scholarships planned at $2,000 each</li>
+              </ul>
+              <Cta href={links.apply}>Apply Now</Cta>
+            </article>
+            <article id="mentorship" className="program-card mentorship-card">
+              <p className="eyebrow">Mentorship that makes a difference</p>
+              <h2>Our scholars are never alone on the journey.</h2>
+              <ul>
+                <li>Confidence-building and leadership development</li>
+                <li>Professional exposure and career exploration</li>
+                <li>Networking with accomplished women leaders</li>
+                <li>Life-skills programming for long-term success</li>
+              </ul>
+            </article>
           </div>
         </section>
 
-        <section id="board" className="board-section">
-          <div className="shell">
-            <SectionIntro
-              eyebrow="Meet the board"
-              title="Professional women turning their networks into opportunity."
-              body="The BABC board brings together leaders from finance, real estate, banking, tax, title, and community development who volunteer their time and experience to support scholars."
-            />
-            <div className="board-grid">
-              {board.map((member) => (
-                <article className="board-card" key={member.name}>
-                  <div className="board-photo"><Image src={member.image} alt={`${member.name}, ${member.role} of the BABC Scholarship Foundation`} fill sizes="(max-width: 640px) 50vw, (max-width: 1000px) 33vw, 22vw" /></div>
-                  <div className="board-copy"><span>{member.role}</span><h3>{member.name}</h3><p>{member.bio}</p></div>
-                </article>
-              ))}
-            </div>
+        <section id="board" className="board shell">
+          <div className="section-heading compact">
+            <p className="eyebrow">Meet our board</p>
+            <h2>A dedicated team of professional women lifting up the next generation.</h2>
+          </div>
+          <div className="board-grid">
+            {board.map(([name, role, image]) => (
+              <article className="board-card" key={name}>
+                <div className="board-photo"><Image src={image} alt={`${name}, ${role}`} fill sizes="(max-width: 700px) 50vw, 20vw" /></div>
+                <h3>{name}</h3><p>{role}</p>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="closing-section shell">
-          <div>
-            <p className="eyebrow">Keep the circle growing</p>
-            <h2>Support the next scholar who is ready to believe bigger.</h2>
-          </div>
-          <div className="closing-actions">
-            <ExternalButton href={links.donate}>Make a donation</ExternalButton>
-            <ExternalButton href={links.gala} variant="quiet">2026 gala</ExternalButton>
-            <ExternalButton href={links.sponsor} variant="quiet">Sponsor package</ExternalButton>
+        <section className="gala-teaser">
+          <div className="shell gala-grid">
+            <div className="gala-copy">
+              <p className="eyebrow">Save the date</p>
+              <h2>Fifth Annual BABC Scholarship Foundation Gala</h2>
+              <p className="gala-date">Friday, November 13, 2026 · 6:00 PM</p>
+              <p>An elegant evening bringing scholars, sponsors, volunteers, supporters, and community leaders together to fund scholarships and mentorship.</p>
+              <div className="button-row"><Cta href={links.gala}>View Gala</Cta><Cta href={links.sponsor} secondary>Become a Sponsor</Cta></div>
+            </div>
+            <div className="gala-photo"><Image src={images.scholars2025} alt="BABC community celebrating scholarship recipients" fill sizes="(max-width: 900px) 100vw, 50vw" /></div>
           </div>
         </section>
       </main>
 
       <footer>
         <div className="shell footer-grid">
-          <div><strong>BABC Scholarship Foundation</strong><p>Believe and Achieve Book Club Scholarship Foundation</p></div>
-          <div><p>964 East Badillo Street #223, Covina, CA 91724</p><p>501(c)(3) nonprofit · Tax ID #93-1833636</p></div>
-          <div><p>© 2026 BABC Scholarship Foundation</p><p>Serving scholars across Southern California.</p></div>
+          <LogoPlaceholder />
+          <p>BABC Scholarship Foundation is a 501(c)(3) nonprofit organization committed to empowering young women to believe, achieve, and pursue higher education.</p>
+          <div><p>964 East Badillo Street #223<br />Covina, CA 91724</p><p>Tax ID #93-1833636</p></div>
+          <Cta href={links.donate}>Donate</Cta>
         </div>
       </footer>
     </>
