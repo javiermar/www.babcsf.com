@@ -10,6 +10,7 @@ type MotionRevealProps = {
   direction?: "up" | "left" | "right";
   id?: string;
   ariaLabel?: string;
+  "aria-label"?: string;
 };
 
 const offsets = {
@@ -18,14 +19,16 @@ const offsets = {
   right: { x: 28, y: 0 },
 } as const;
 
-export function MotionReveal({ children, className = "", delay = 0, direction = "up", id, ariaLabel }: MotionRevealProps) {
+export function MotionReveal(props: MotionRevealProps) {
+  const { children, className = "", delay = 0, direction = "up", id, ariaLabel } = props;
   const reduceMotion = useReducedMotion();
   const offset = offsets[direction];
+  const accessibleLabel = ariaLabel ?? props["aria-label"];
 
   return (
     <motion.div
       id={id}
-      aria-label={ariaLabel}
+      aria-label={accessibleLabel}
       className={className}
       initial={reduceMotion ? false : { opacity: 0, ...offset }}
       whileInView={reduceMotion ? undefined : { opacity: 1, x: 0, y: 0 }}
