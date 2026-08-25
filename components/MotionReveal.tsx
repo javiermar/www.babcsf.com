@@ -3,11 +3,12 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-export function MotionReveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+export function MotionReveal({ children, className = "", delay = 0, id }: { children: ReactNode; className?: string; delay?: number; id?: string }) {
   const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
+      id={id}
       className={className}
       initial={reduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
