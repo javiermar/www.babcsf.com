@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
 import Script from "next/script";
+import { ScrollToTopOnNavigation } from "@/components/ScrollToTopOnNavigation";
 import "./globals.css";
 import "./fixes.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${geist.variable} ${playfair.variable}`} data-theme="babcsf">
       <body>
+        <ScrollToTopOnNavigation />
         {children}
         {gaId ? (
           <>
