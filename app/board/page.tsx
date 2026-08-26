@@ -7,6 +7,7 @@ import { BOARD_PROFILES } from "@/lib/directory";
 export const metadata: Metadata = {
   title: "Board | BABC Scholarship Foundation",
   description: "Meet the professional women who lead, mentor, fundraise, and create opportunities through BABC Scholarship Foundation.",
+  alternates: { canonical: "/board" },
 };
 
 export default function BoardPage() {
