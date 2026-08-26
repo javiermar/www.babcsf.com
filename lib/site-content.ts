@@ -1,9 +1,9 @@
 export type ExternalUrl = `https://${string}`;
-export type SectionHref = `#${string}`;
+export type InternalHref = `/${string}` | `#${string}`;
 
 type NavigationItem = Readonly<{
   label: string;
-  href: SectionHref;
+  href: InternalHref;
 }>;
 
 type BoardMember = Readonly<{
@@ -55,8 +55,6 @@ export const SITE_LINKS = {
   sponsor: "https://drive.google.com/file/d/1oydRY-pn4nawDV7rSOKZb8yjtNAGPMzu/view?usp=share_link",
 } as const satisfies Record<"apply" | "donate" | "gala" | "sponsor", ExternalUrl>;
 
-// These public BABC URLs map to the exact image filenames preserved in the
-// downloaded source-page asset folders in Google Drive.
 export const SITE_IMAGES = {
   naomi: "https://www.babcsf.com/uploads/5/0/9/3/50936111/naomi_orig.jpg",
   scholars2025: "https://www.babcsf.com/uploads/5/0/9/3/50936111/unnamed-5_orig.jpg",
@@ -65,11 +63,12 @@ export const SITE_IMAGES = {
 } as const satisfies Record<"naomi" | "scholars2025" | "scholars2024" | "gala", ExternalUrl>;
 
 export const NAV_ITEMS = [
-  { label: "About", href: "#mission" },
-  { label: "Scholarships", href: "#scholarships" },
-  { label: "Mentorship", href: "#mentorship" },
-  { label: "Gala", href: "#gala" },
-  { label: "Board", href: "#board" },
+  { label: "About", href: "/about" },
+  { label: "Scholarships", href: "/scholarships" },
+  { label: "Mentorship", href: "/mentorship" },
+  { label: "Gala", href: "/gala" },
+  { label: "Board", href: "/board" },
+  { label: "Impact", href: "/impact" },
 ] as const satisfies readonly NavigationItem[];
 
 export const HOMEPAGE_COPY = {
