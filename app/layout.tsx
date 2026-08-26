@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import "./fixes.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"] });

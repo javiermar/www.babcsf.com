@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { MenuIcon } from "@/components/Icons";
 import { NAV_ITEMS } from "@/lib/site-content";
@@ -19,9 +20,9 @@ export function MobileNav() {
         <MenuIcon className="mobile-nav-icon" />
       </button>
       {open ? (
-        <ul className="dropdown-content menu bg-base-100 rounded-box z-50 mt-3 w-56 border border-base-300 p-2 shadow-xl" aria-label="Mobile navigation">
+        <ul className="dropdown-content menu bg-base-100 rounded-box z-50 mt-3 w-60 border border-base-300 p-2 shadow-xl" aria-label="Mobile navigation">
           {NAV_ITEMS.map(({ label, href }) => (
-            <li key={href}><a href={href} onClick={() => setOpen(false)}>{label}</a></li>
+            <li key={href}><Link href={href} onClick={() => setOpen(false)}>{label}</Link></li>
           ))}
         </ul>
       ) : null}
