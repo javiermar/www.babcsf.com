@@ -45,15 +45,21 @@ export default function Home() {
     <>
       <header className="site-header-wrap">
         <div className="navbar shell site-nav">
-          <a href="#top" className="brand" aria-label="BABC Scholarship Foundation home">
-            <Image
-              className="h-14 w-auto object-contain"
-              src="/logo.png"
-              alt="BABC Scholarship Foundation"
-              width={240}
-              height={96}
-              priority
-            />
+          <a href="#top" className="brand min-w-0" aria-label="BABC Scholarship Foundation home">
+            <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full md:h-16 md:w-16">
+              <Image
+                className="scale-[1.9] object-contain"
+                src="/logo.png"
+                alt=""
+                fill
+                priority
+                sizes="64px"
+              />
+            </span>
+            <span className="hidden leading-tight sm:block">
+              <strong className="block font-[var(--font-playfair)] text-[18px] font-semibold text-[#0d2745] md:text-[20px]">BABC</strong>
+              <small className="block text-[9px] font-semibold uppercase tracking-[0.12em] text-[#667085] md:text-[10px]">Scholarship Foundation</small>
+            </span>
           </a>
           <nav aria-label="Primary navigation" className="nav-links">
             {NAV_ITEMS.map(({ label, href }) => <a href={href} key={href}>{label}</a>)}
@@ -172,20 +178,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-base-200" aria-labelledby="sponsor-heading">
-          <div className="shell section-pad">
-            <MotionReveal className="mx-auto max-w-3xl text-center">
+        <section className="sponsor-section" aria-labelledby="sponsor-heading">
+          <div className="shell sponsor-shell">
+            <MotionReveal className="sponsor-intro">
               <p className="eyebrow">2026 Gala Sponsors</p>
               <h2 id="sponsor-heading">Community partners investing in our scholars.</h2>
               <p className="body-copy">BABC is grateful to the organizations and donors helping turn scholarship funding into long-term opportunity.</p>
             </MotionReveal>
-            <MotionReveal className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5" delay={0.05}>
+            <MotionReveal className="sponsor-grid" delay={0.05}>
               {GALA_SPONSORS.map(({ name, tier, image }) => (
-                <article className="card border border-base-300 bg-base-100 p-3 shadow-none" key={`${tier}-${name}`}>
-                  <div className="relative h-24 overflow-hidden bg-white">
-                    <ImageWithSkeleton className="object-contain p-3" src={image} alt={`${name}, ${tier} sponsor`} fill sizes="(max-width: 700px) 42vw, 180px" />
+                <article className="sponsor-card" key={`${tier}-${name}`}>
+                  <div className="sponsor-logo-frame">
+                    <ImageWithSkeleton src={image} alt={`${name}, ${tier} sponsor`} fill sizes="(max-width: 700px) 42vw, 180px" />
                   </div>
-                  <span className="mt-2 text-center text-[10px] font-bold uppercase tracking-[.12em] text-primary">{tier}</span>
+                  <span>{tier}</span>
                 </article>
               ))}
             </MotionReveal>
