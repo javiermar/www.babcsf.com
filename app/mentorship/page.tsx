@@ -7,6 +7,7 @@ import { SITE_LINKS } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "Mentorship | BABC Scholarship Foundation",
   description: "BABC supports scholars beyond the award through mentorship, professional exposure, confidence building, and alumni connection.",
+  alternates: { canonical: "/mentorship" },
 };
 
 export default function MentorshipPage() {
