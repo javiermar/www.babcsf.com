@@ -7,6 +7,7 @@ import { GALA_SPONSORS, SITE_LINKS } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "2026 Gala | BABC Scholarship Foundation",
   description: "Fifth Annual BABC Scholarship Foundation Gala, Friday November 13, 2026 at Pacific Palms Resort.",
+  alternates: { canonical: "/gala" },
 };
 
 const sponsorships = [
