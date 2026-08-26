@@ -40,6 +40,14 @@ type HomepageCopy = Readonly<{
   footerMission: string;
 }>;
 
+type SponsorTier = "Diamond" | "Platinum" | "Gold" | "Silver" | "Donor";
+
+type GalaSponsor = Readonly<{
+  name: string;
+  tier: SponsorTier;
+  image: ExternalUrl;
+}>;
+
 export const SITE_LINKS = {
   apply: "https://form.jotform.com/262286896162065",
   donate: "https://buy.stripe.com/8wM2aW13q7Gu3lKcMM",
@@ -138,3 +146,15 @@ export const MENTORSHIP_POINTS = [
   "Career guidance, golf and networking, and professional etiquette training",
   "Financial literacy plus living-trust and asset-protection education",
 ] as const satisfies readonly string[];
+
+export const GALA_SPONSORS = [
+  { name: "Life Works", tier: "Diamond", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/life-works-logo-black_orig.jpeg" },
+  { name: "Diamond Sponsor", tier: "Diamond", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/img-5765-2_orig.jpeg" },
+  { name: "Platinum Sponsor", tier: "Platinum", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/bae-logo_orig.jpg" },
+  { name: "Provident Title / Title by Vero", tier: "Gold", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/provident-title-title-by-vero-gold-sponsor_orig.jpeg" },
+  { name: "Alarcon Group LLC", tier: "Gold", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/alarcon-group-llc_orig.png" },
+  { name: "Blue and Zueus Foundation", tier: "Gold", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/blue-and-zueus-foundation_orig.jpg" },
+  { name: "Jules Hirst", tier: "Silver", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/jules-hirst-b-logo-silver_orig.png" },
+  { name: "My Favorite Notary", tier: "Silver", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/my-favorite-notary-logo-gold_orig.png" },
+  { name: "Royal Business Bank", tier: "Donor", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/royal-business-bank-logo_orig.png" },
+] as const satisfies readonly GalaSponsor[];
