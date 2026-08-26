@@ -28,7 +28,7 @@ type ScholarshipStep = Readonly<{
 type ScholarshipFaq = Readonly<{
   question: string;
   answer: string;
-  initiallyOpen?: boolean;
+  initiallyOpen: boolean;
 }>;
 
 type HomepageCopy = Readonly<{
@@ -123,10 +123,12 @@ export const SCHOLARSHIP_FAQS = [
   {
     question: "What does BABC consider?",
     answer: "Educational commitment, financial need, resilience, leadership, community involvement, and a positive vision for the future.",
+    initiallyOpen: false,
   },
   {
     question: "What happens after the award?",
     answer: "BABC stays connected through direct mentor support, an active WhatsApp scholar network, check-ins, career guidance, reunions, milestones, and graduation celebrations.",
+    initiallyOpen: false,
   },
 ] as const satisfies readonly ScholarshipFaq[];
 
