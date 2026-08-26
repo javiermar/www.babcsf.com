@@ -1,8 +1,9 @@
-import type { SVGProps } from "react";
+import type { ReactNode, SVGProps } from "react";
 
-type IconProps = SVGProps<SVGSVGElement>;
+type IconProps = Readonly<Omit<SVGProps<SVGSVGElement>, "children">>;
+type BaseIconProps = IconProps & Readonly<{ children: ReactNode }>;
 
-function BaseIcon({ children, ...props }: IconProps) {
+function BaseIcon({ children, ...props }: BaseIconProps) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
       {children}
