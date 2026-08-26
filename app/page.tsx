@@ -14,7 +14,7 @@ const images = {
   naomi: "https://www.babcsf.com/uploads/5/0/9/3/50936111/naomi_orig.jpg",
   scholars2025: "https://www.babcsf.com/uploads/5/0/9/3/50936111/unnamed-5_orig.jpg",
   scholars2024: "https://www.babcsf.com/uploads/5/0/9/3/50936111/group_orig.jpg",
-  gala: "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/gala-2025.jpg",
+  gala: "https://www.babcsf.com/uploads/5/0/9/3/50936111/babc-sf-2026-gala_orig.jpg",
 } as const;
 
 const board = [
@@ -23,12 +23,21 @@ const board = [
   ["Martha Morales", "Treasurer", "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/martha-morales_1.png"],
   ["Veronica Franco", "Co-Treasurer", "https://www.babcsf.com/uploads/5/0/9/3/50936111/veronicapic_orig.jpg"],
   ["Nora Garcia", "Secretary", "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/nora-garcia_1.jpg"],
+  ["Rosa Alicia Centeno", "Director", "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/rosa-alicia-headshot_1.png"],
+  ["Jennifer Zamora", "Director", "https://www.babcsf.com/uploads/5/0/9/3/50936111/published/jen-zamora-headshot_1.jpg"],
 ] as const;
 
 const scholarSlides = [
   { id: "scholar-2025", eyebrow: "2025 cohort", title: "Nine scholars celebrated", body: "A growing class of young women supported by BABC scholarships, mentorship, and community.", image: images.scholars2025, alt: "BABC 2025 scholarship recipients" },
   { id: "scholar-naomi", eyebrow: "2026 Rising Star", title: "Naomi Zamora", body: "UCLA Psychobiology graduate, former research assistant, and now a 911 dispatcher with UCLA Police.", image: images.naomi, alt: "Naomi Zamora, BABC 2026 Rising Star" },
   { id: "scholar-2024", eyebrow: "2024 cohort", title: "Eight scholars, $16,000 invested", body: "Selected from more than 110 applicants representing 18 Southern California schools and colleges.", image: images.scholars2024, alt: "BABC 2024 scholarship recipients" },
+] as const;
+
+const scholarshipSteps = [
+  ["Aug 17", "Applications open"],
+  ["Sep 17", "Application deadline"],
+  ["By Oct 5", "Recipients announced"],
+  ["Nov 13", "Scholarship Gala"],
 ] as const;
 
 function Cta({ href, children, outline = false }: { href: string; children: ReactNode; outline?: boolean }) {
@@ -79,10 +88,10 @@ export default function Home() {
 
           <MotionReveal delay={0.08} direction="right" className="spotlight-wrap">
             <div className="section-row"><div><p className="eyebrow">Scholar stories</p><h3 className="compact-heading">Meet the women at the center of the mission.</h3></div><div className="carousel-controls" aria-label="Scholar carousel navigation">{scholarSlides.map((slide, index) => <a className="btn btn-circle btn-sm" key={slide.id} href={`#${slide.id}`} aria-label={`Show scholar story ${index + 1}`}>{index + 1}</a>)}</div></div>
-            <div className="carousel carousel-center scholar-carousel" aria-label="Scholar stories">
+            <div className="carousel carousel-start scholar-carousel" aria-label="Scholar stories">
               {scholarSlides.map((slide) => (
                 <article id={slide.id} className="carousel-item card scholar-slide" key={slide.id}>
-                  <div className="scholar-slide-image"><ImageWithSkeleton src={slide.image} alt={slide.alt} fill sizes="(max-width: 900px) 82vw, 430px" /></div>
+                  <div className="scholar-slide-image"><ImageWithSkeleton src={slide.image} alt={slide.alt} fill sizes="(max-width: 900px) 82vw, 380px" /></div>
                   <div className="scholar-slide-copy"><span>{slide.eyebrow}</span><h3>{slide.title}</h3><p>{slide.body}</p></div>
                 </article>
               ))}
@@ -94,12 +103,13 @@ export default function Home() {
           <div className="shell scholarship-stack">
             <MotionReveal className="section-intro"><p className="eyebrow">2026 Scholarship Cycle</p><h2>Applications are open now.</h2><p className="body-copy">Ten $2,000 scholarships are planned for current Southern California high school seniors and first-year college students.</p></MotionReveal>
 
-            <MotionReveal delay={0.05}>
-              <ul className="timeline scholarship-timeline" aria-label="2026 scholarship timeline">
-                <li><div className="timeline-start">Aug 17</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Applications open</div><hr /></li>
-                <li><hr /><div className="timeline-start">Sep 17</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Application deadline</div><hr /></li>
-                <li><hr /><div className="timeline-start">By Oct 5</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Recipients announced</div><hr /></li>
-                <li><hr /><div className="timeline-start">Nov 13</div><div className="timeline-middle timeline-dot" aria-hidden>●</div><div className="timeline-end timeline-box">Scholarship Gala</div></li>
+            <MotionReveal delay={0.05} className="steps-wrap">
+              <ul className="steps steps-horizontal scholarship-steps" aria-label="2026 scholarship timeline">
+                {scholarshipSteps.map(([date, label], index) => (
+                  <li className="step step-primary" data-content={String(index + 1)} key={date}>
+                    <span className="step-copy"><strong>{date}</strong><small>{label}</small></span>
+                  </li>
+                ))}
               </ul>
             </MotionReveal>
 
@@ -116,7 +126,7 @@ export default function Home() {
 
         <section id="board" className="shell section-pad board-section">
           <MotionReveal><div className="section-row"><div><p className="eyebrow">Meet our board</p><h2>A professional network turned into opportunity.</h2></div><p className="body-copy section-aside">Leaders from finance, real estate, banking, tax, title, and community development volunteer their time and experience to support scholars.</p></div></MotionReveal>
-          <MotionReveal delay={0.06} className="carousel carousel-center board-carousel" aria-label="BABC board members">
+          <MotionReveal delay={0.06} className="carousel carousel-start board-carousel" aria-label="BABC board members">
             {board.map(([name, role, image]) => <article className="carousel-item card board-card" key={name}><div className="board-photo"><ImageWithSkeleton src={image} alt={`${name}, ${role}`} fill sizes="220px" /></div><h3>{name}</h3><p>{role}</p></article>)}
           </MotionReveal>
         </section>
@@ -124,7 +134,7 @@ export default function Home() {
         <section id="gala" className="gala-section">
           <div className="shell gala-grid">
             <MotionReveal className="gala-copy" direction="left"><p className="eyebrow light">Save the date</p><h2>Fifth Annual BABC Scholarship Foundation Gala</h2><p className="gala-date">Friday, November 13, 2026 · 6:00 PM</p><p className="body-copy light-copy">An elegant evening uniting scholars, sponsors, volunteers, and community leaders to fund the next class of BABC scholars.</p><div className="actions"><Cta href={links.gala}>View Gala</Cta><Cta href={links.sponsor} outline>Become a Sponsor</Cta></div></MotionReveal>
-            <MotionReveal className="gala-image" delay={0.08} direction="right"><ImageWithSkeleton src={images.gala} alt="BABC Scholarship Foundation gala" fill sizes="(max-width: 900px) 100vw, 50vw" /></MotionReveal>
+            <MotionReveal className="gala-image gala-poster-panel" delay={0.08} direction="right"><ImageWithSkeleton className="gala-poster" src={images.gala} alt="2026 BABC Scholarship Foundation Gala" fill sizes="(max-width: 900px) 100vw, 50vw" /></MotionReveal>
           </div>
         </section>
 
