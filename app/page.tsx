@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { CarouselControls } from "@/components/CarouselControls";
@@ -7,6 +8,7 @@ import { MobileNav } from "@/components/MobileNav";
 import { MotionReveal } from "@/components/MotionReveal";
 import {
   BOARD_MEMBERS,
+  GALA_SPONSORS,
   HOMEPAGE_COPY,
   MENTORSHIP_POINTS,
   NAV_ITEMS,
@@ -44,8 +46,14 @@ export default function Home() {
       <header className="site-header-wrap">
         <div className="navbar shell site-nav">
           <a href="#top" className="brand" aria-label="BABC Scholarship Foundation home">
-            <span className="brand-mark" aria-hidden>✦</span>
-            <span><strong>BABC</strong><small>Scholarship Foundation</small></span>
+            <Image
+              className="brand-logo"
+              src="/logo.png"
+              alt="BABC Scholarship Foundation"
+              width={240}
+              height={96}
+              priority
+            />
           </a>
           <nav aria-label="Primary navigation" className="nav-links">
             {NAV_ITEMS.map(({ label, href }) => <a href={href} key={href}>{label}</a>)}
@@ -161,6 +169,26 @@ export default function Home() {
               <div className="actions"><Cta href={SITE_LINKS.gala}>View Gala</Cta><Cta href={SITE_LINKS.sponsor} outline>Become a Sponsor</Cta></div>
             </MotionReveal>
             <MotionReveal className="gala-image gala-poster-panel" delay={0.08} direction="right"><ImageWithSkeleton className="gala-poster" src={SITE_IMAGES.gala} alt="2026 BABC Scholarship Foundation Gala" fill sizes="(max-width: 900px) 100vw, 50vw" /></MotionReveal>
+          </div>
+        </section>
+
+        <section className="sponsor-section" aria-labelledby="sponsor-heading">
+          <div className="shell sponsor-shell">
+            <MotionReveal className="sponsor-intro">
+              <p className="eyebrow">2026 Gala Sponsors</p>
+              <h2 id="sponsor-heading">Community partners investing in our scholars.</h2>
+              <p className="body-copy">BABC is grateful to the organizations and donors helping turn scholarship funding into long-term opportunity.</p>
+            </MotionReveal>
+            <MotionReveal className="sponsor-grid" delay={0.05}>
+              {GALA_SPONSORS.map(({ name, tier, image }) => (
+                <article className="sponsor-card" key={`${tier}-${name}`}>
+                  <div className="sponsor-logo-frame">
+                    <ImageWithSkeleton src={image} alt={`${name}, ${tier} sponsor`} fill sizes="(max-width: 700px) 42vw, 180px" />
+                  </div>
+                  <span>{tier}</span>
+                </article>
+              ))}
+            </MotionReveal>
           </div>
         </section>
 
