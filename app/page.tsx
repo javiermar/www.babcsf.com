@@ -47,7 +47,7 @@ export default function Home() {
         <div className="navbar shell site-nav">
           <a href="#top" className="brand" aria-label="BABC Scholarship Foundation home">
             <Image
-              className="brand-logo"
+              className="h-14 w-auto object-contain"
               src="/logo.png"
               alt="BABC Scholarship Foundation"
               width={240}
@@ -172,20 +172,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="sponsor-section" aria-labelledby="sponsor-heading">
-          <div className="shell sponsor-shell">
-            <MotionReveal className="sponsor-intro">
+        <section className="bg-base-200" aria-labelledby="sponsor-heading">
+          <div className="shell section-pad">
+            <MotionReveal className="mx-auto max-w-3xl text-center">
               <p className="eyebrow">2026 Gala Sponsors</p>
               <h2 id="sponsor-heading">Community partners investing in our scholars.</h2>
               <p className="body-copy">BABC is grateful to the organizations and donors helping turn scholarship funding into long-term opportunity.</p>
             </MotionReveal>
-            <MotionReveal className="sponsor-grid" delay={0.05}>
+            <MotionReveal className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5" delay={0.05}>
               {GALA_SPONSORS.map(({ name, tier, image }) => (
-                <article className="sponsor-card" key={`${tier}-${name}`}>
-                  <div className="sponsor-logo-frame">
-                    <ImageWithSkeleton src={image} alt={`${name}, ${tier} sponsor`} fill sizes="(max-width: 700px) 42vw, 180px" />
+                <article className="card border border-base-300 bg-base-100 p-3 shadow-none" key={`${tier}-${name}`}>
+                  <div className="relative h-24 overflow-hidden bg-white">
+                    <ImageWithSkeleton className="object-contain p-3" src={image} alt={`${name}, ${tier} sponsor`} fill sizes="(max-width: 700px) 42vw, 180px" />
                   </div>
-                  <span>{tier}</span>
+                  <span className="mt-2 text-center text-[10px] font-bold uppercase tracking-[.12em] text-primary">{tier}</span>
                 </article>
               ))}
             </MotionReveal>
