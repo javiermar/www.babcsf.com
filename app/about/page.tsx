@@ -6,6 +6,7 @@ import { SITE_LINKS } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "About | BABC Scholarship Foundation",
   description: "Learn about Believe and Achieve Book Club Scholarship Foundation, its mission, scholarship program, mentorship, and community leadership.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
