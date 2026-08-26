@@ -31,6 +31,15 @@ type ScholarshipFaq = Readonly<{
   initiallyOpen?: boolean;
 }>;
 
+type HomepageCopy = Readonly<{
+  heroLede: string;
+  missionBody: string;
+  missionTagline: string;
+  scholarshipIntro: string;
+  boardIntro: string;
+  footerMission: string;
+}>;
+
 export const SITE_LINKS = {
   apply: "https://form.jotform.com/262286896162065",
   donate: "https://buy.stripe.com/8wM2aW13q7Gu3lKcMM",
@@ -38,6 +47,8 @@ export const SITE_LINKS = {
   sponsor: "https://drive.google.com/file/d/1oydRY-pn4nawDV7rSOKZb8yjtNAGPMzu/view?usp=share_link",
 } as const satisfies Record<"apply" | "donate" | "gala" | "sponsor", ExternalUrl>;
 
+// These public BABC URLs map to the exact image filenames preserved in the
+// downloaded source-page asset folders in Google Drive.
 export const SITE_IMAGES = {
   naomi: "https://www.babcsf.com/uploads/5/0/9/3/50936111/naomi_orig.jpg",
   scholars2025: "https://www.babcsf.com/uploads/5/0/9/3/50936111/unnamed-5_orig.jpg",
@@ -53,6 +64,15 @@ export const NAV_ITEMS = [
   { label: "Board", href: "#board" },
 ] as const satisfies readonly NavigationItem[];
 
+export const HOMEPAGE_COPY = {
+  heroLede: "A volunteer-led scholarship and mentorship organization empowering young women as they transition from high school into college and beyond.",
+  missionBody: "The Believe and Achieve Book Club is dedicated to empowering young women as they transition from high school into college. BABC provides scholarships, mentorship, and ongoing support so scholars can pursue higher education and thrive throughout their academic journey and beyond.",
+  missionTagline: "From Dreams to Degrees — We Walk With Her!",
+  scholarshipIntro: "BABC’s 2026 priority is to expand to 10+ scholarships. The program serves current Southern California high school seniors and first-year college students, with 90% of applicants coming from low-to-moderate-income households.",
+  boardIntro: "Seven professional women raise funds, mentor scholars, and create educational opportunities throughout the year.",
+  footerMission: "Scholarships, mentorship, and ongoing support for young women from high school through college and beyond.",
+} as const satisfies HomepageCopy;
+
 export const BOARD_MEMBERS = [
   { name: "Jade Ramos", role: "President", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/jade-ramos_1.jpg" },
   { name: "Janie Rodriguez", role: "Vice President", image: "https://www.babcsf.com/uploads/5/0/9/3/50936111/editor/janie-marquez_1.png" },
@@ -67,21 +87,21 @@ export const SCHOLAR_SLIDES = [
   {
     eyebrow: "2025 cohort",
     title: "Nine scholars celebrated",
-    body: "A growing class of young women supported by BABC scholarships, mentorship, and community.",
+    body: "Nine recipients received college scholarships plus recognition from the City of Whittier and Senator Susan Rubio.",
     image: SITE_IMAGES.scholars2025,
-    alt: "BABC 2025 scholarship recipients",
+    alt: "BABC 2025 scholarship celebration",
   },
   {
     eyebrow: "2026 Rising Star",
     title: "Naomi Zamora",
-    body: "UCLA Psychobiology graduate, former research assistant, and now a 911 dispatcher with UCLA Police.",
+    body: "Naomi graduated from UCLA a year early in Psychobiology, served as a research assistant in the BioCritical Studies Lab, and now works as a 911 dispatcher with UCLA Police.",
     image: SITE_IMAGES.naomi,
     alt: "Naomi Zamora, BABC 2026 Rising Star",
   },
   {
     eyebrow: "2024 cohort",
     title: "Eight scholars, $16,000 invested",
-    body: "Selected from more than 110 applicants representing 18 Southern California schools and colleges.",
+    body: "Eight scholarships were awarded from a pool of more than 110 applicants representing 18 schools and colleges.",
     image: SITE_IMAGES.scholars2024,
     alt: "BABC 2024 scholarship recipients",
   },
@@ -106,6 +126,13 @@ export const SCHOLARSHIP_FAQS = [
   },
   {
     question: "What happens after the award?",
-    answer: "Recipients join a growing community with mentorship, networking, leadership experiences, and continued alumni connection.",
+    answer: "BABC stays connected through direct mentor support, an active WhatsApp scholar network, check-ins, career guidance, reunions, milestones, and graduation celebrations.",
   },
 ] as const satisfies readonly ScholarshipFaq[];
+
+export const MENTORSHIP_POINTS = [
+  "Ongoing mentorship throughout college",
+  "Scholar reunions, alumni engagement, and WhatsApp support",
+  "Career guidance, golf and networking, and professional etiquette training",
+  "Financial literacy plus living-trust and asset-protection education",
+] as const satisfies readonly string[];
