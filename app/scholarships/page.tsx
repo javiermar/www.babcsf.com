@@ -8,6 +8,7 @@ import { SCHOLARSHIP_STEPS, SITE_LINKS } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "Scholarships | BABC Scholarship Foundation",
   description: "Meet BABC scholarship recipients and review the current Southern California scholarship cycle.",
+  alternates: { canonical: "/scholarships" },
 };
 
 const years = [2025, 2024, 2023, 2022] as const;
