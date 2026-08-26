@@ -6,6 +6,7 @@ import { SITE_LINKS } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "Impact | BABC Scholarship Foundation",
   description: "BABC scholarship impact, annual growth, community partnerships, and educational programming.",
+  alternates: { canonical: "/impact" },
 };
 
 const growth = [
