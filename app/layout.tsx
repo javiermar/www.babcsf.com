@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   title: "BABC Scholarship Foundation | Believe. Achieve. Lead.",
   description: "BABC provides scholarships, mentorship, leadership development, and ongoing support to young women across Southern California.",
   alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: "/icon.jpg", type: "image/jpeg" }],
+    shortcut: "/icon.jpg",
+  },
   openGraph: {
     title: "BABC Scholarship Foundation",
     description: "Scholarships are only the beginning. BABC helps young women believe, achieve, and lead.",
